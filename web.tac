@@ -2,10 +2,10 @@ import os
 
 from twisted.application import service, internet
 from twisted.web import static, server
-
+_port = int(os.environ["PORT"])
 def web_app():
     file_server = server.Site(static.File(os.getcwd()));
-    return internet.TCPServer(8080, file_server)
+    return internet.TCPServer(_port, file_server)
 
 application = service.Application("Web Server")
 service = web_app()
