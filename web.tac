@@ -8,18 +8,16 @@ _port = int(os.environ["PORT"])
 
 class IndexHandler(cyclone.web.RequestHandler):
     def get(self):
-        self.redirect("/static/index.html")
+        self.redirect("/index.html")
 
 class Application(cyclone.web.Application):
     def __init__(self):
         handlers = [
             (r"/", IndexHandler),
+            (r"/(.*)", cyclone.web.StaticFileHandler, {"path": "html"}),
         ]
-
-        settings = {
-            "static_path": "./html",
-        }
-
+        
+        settings = {}
         cyclone.web.Application.__init__(self, handlers, **settings)
 
 site = Application()
