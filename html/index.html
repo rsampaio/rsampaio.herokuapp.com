@@ -14,6 +14,22 @@
     <!-- Le styles -->
     <link rel="stylesheet/less" href="js/lib/bootstrap.less">
     <script src="js/less.js"></script>
+    <script src="js/jquery-1.6.3.min.js"></script>
+    <script>
+      jQuery.fn.autolink = function () {
+        return this.each( function(){
+            var re = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
+            $(this).html( $(this).html().replace(re, '<a href="$1" rel="nofollow">$1</a> ') );
+        });
+      };
+
+      var tw_data = $.get("/twitter", {}, 
+        function(data, status, xhr){
+          $("#twitter").html(data);
+          $("#twitter").autolink(); 
+        }
+      );
+    </script>
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -67,7 +83,7 @@
         </div>
         <div class="span5">
           <h2>Twitter</h2>
-           <p>Twitter live timeline soon...</p>
+           <p id="twitter">Twitter live timeline soon...</p>
           <p><a class="btn" href="http://twitter.com/#!/rodrigovaz">Go to twitter &raquo;</a></p>
        </div>
         <div class="span5">
@@ -78,7 +94,7 @@
       </div>
 
       <footer>
-        <p>&copy; Rodrigo Sampaio Vaz 2011 <small>Served by: Python + Twisted; Hosted by: Heroku; Designed using: Twitter Bootstrap</small></p>
+        <p>&copy; Rodrigo Sampaio Vaz 2011 <small>Served by: Python + Twisted + Cyclone; Hosted by: Heroku; Designed using: Twitter Bootstrap</small></p>
       </footer>
 
     </div> <!-- /container -->

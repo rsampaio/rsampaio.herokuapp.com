@@ -1,6 +1,6 @@
 import os
-
 import cyclone.web
+import twitter
 from twisted.application import service, internet
 from twisted.web import static, server
 
@@ -14,7 +14,9 @@ class Application(cyclone.web.Application):
     def __init__(self):
         handlers = [
             (r"/", IndexHandler),
+            (r"/twitter", twitter.TwitterHandler),
             (r"/(.*)", cyclone.web.StaticFileHandler, {"path": "html"}),
+            
         ]
         
         settings = {}
